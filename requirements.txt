@@ -1,0 +1,7 @@
+   fastapi
+   uvicorn
+   pydantic
+   PySide6
+   requests
+   pytest
+   httpx
