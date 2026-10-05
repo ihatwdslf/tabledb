@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -r requirements-server.txt
 
 COPY core ./core
 COPY server ./server
+COPY web ./web
 
 ENV DATA_DIR=/data
 EXPOSE 8000

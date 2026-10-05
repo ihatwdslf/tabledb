@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TableDB</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>TableDB</h1>
+    <span id="server-info"></span>
+  </header>
+
+  <main>
+    <aside>
+      <label for="db-select">База даних:</label>
+      <select id="db-select"></select>
+      <button id="new-db-btn">Нова база</button>
+      <button id="refresh-btn">Оновити</button>
+      <button id="save-btn">Зберегти на диск</button>
+      <button id="load-btn">Завантажити з диска</button>
+
+      <h2>Таблиці</h2>
+      <ul id="tables-list"></ul>
+      <button id="create-table-btn">Створити таблицю</button>
+      <button id="drop-table-btn">Видалити таблицю</button>
+      <button id="join-btn">Сполучити таблиці</button>
+    </aside>
+
+    <section id="content">
+      <h2 id="table-title">Таблицю не обрано</h2>
+      <div class="table-wrap">
+        <table id="data-table"></table>
+      </div>
+      <div class="row-buttons">
+        <button id="add-row-btn">Додати рядок</button>
+        <button id="delete-row-btn">Видалити рядок</button>
+      </div>
+    </section>
+  </main>
+
+  <footer id="status"></footer>
+
+  <!-- Нова база -->
+  <dialog id="new-db-dialog">
+    <h3>Нова база</h3>
+    <label>Назва бази: <input id="new-db-name"></label>
+    <p class="error"></p>
+    <div class="dialog-buttons">
+      <button id="new-db-ok">OK</button>
+      <button class="cancel">Скасувати</button>
+    </div>
+  </dialog>
+
+  <!-- Створення таблиці -->
+  <dialog id="create-table-dialog">
+    <h3>Створити таблицю</h3>
+    <label>Назва таблиці: <input id="new-table-name"></label>
+    <table id="columns-editor">
+      <thead><tr><th>Назва колонки</th><th>Тип</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="dialog-buttons">
+      <button id="add-column-btn">Додати колонку</button>
+      <button id="remove-column-btn">Видалити колонку</button>
+    </div>
+    <p class="error"></p>
+    <div class="dialog-buttons">
+      <button id="create-table-ok">OK</button>
+      <button class="cancel">Скасувати</button>
+    </div>
+  </dialog>
+
+  <!-- Додавання рядка -->
+  <dialog id="add-row-dialog">
+    <h3>Додати рядок</h3>
+    <div id="add-row-fields"></div>
+    <p class="error"></p>
+    <div class="dialog-buttons">
+      <button id="add-row-ok">OK</button>
+      <button class="cancel">Скасувати</button>
+    </div>
+  </dialog>
+
+  <!-- Сполучення таблиць -->
+  <dialog id="join-dialog">
+    <h3>Сполучення таблиць</h3>
+    <label>Таблиця 1: <select id="join-table1"></select></label>
+    <label>Таблиця 2: <select id="join-table2"></select></label>
+    <label>Спільне поле: <select id="join-field"></select></label>
+    <button id="join-run">Виконати сполучення</button>
+    <p class="error"></p>
+    <div class="table-wrap">
+      <table id="join-result"></table>
+    </div>
+    <div class="dialog-buttons">
+      <input id="join-save-name" placeholder="назва нової таблиці">
+      <button id="join-save">Зберегти як нову таблицю</button>
+      <button class="cancel">Закрити</button>
+    </div>
+  </dialog>
+
+  <script src="/static/api.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

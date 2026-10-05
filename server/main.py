@@ -1,7 +1,9 @@
 import os
 
 from fastapi import FastAPI, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 from pydantic import BaseModel
 
 from core.field_types import VALUE_CLASSES, FieldType, ValidationError
@@ -12,6 +14,13 @@ from server.storage import StorageAdapter
 app = FastAPI(title="TableDB API")
 storage = StorageAdapter(os.getenv("DATA_DIR", "data"))
 join_service = JoinService()
+WEB_DIR = Path(__file__).resolve().parent.parent / "web"
+app.mount("/static", StaticFiles(directory=WEB_DIR), name="static")
+
+
+@app.get("/", include_in_schema=False)
+def index():
+    return FileResponse(WEB_DIR / "index.html")
 
 
 # ---------- обробка помилок ----------
