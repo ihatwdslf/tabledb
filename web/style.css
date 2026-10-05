@@ -1,3 +1,18 @@
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --border: #e2e6ee;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --accent: #3b5bdb;
+  --accent-hover: #3249b8;
+  --accent-soft: #e9eeff;
+  --danger: #c92a2a;
+  --danger-soft: #fff1f1;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 2px 6px rgba(16, 24, 40, 0.06);
+}
+
 * { box-sizing: border-box; }
 
 body {
@@ -5,150 +20,258 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
   font-size: 14px;
-  color: #222;
-  background: #f4f5f7;
+  color: var(--text);
+  background: var(--bg);
 }
 
 /* ---------- шапка ---------- */
 header {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
-  padding: 10px 20px;
-  background: #2d3e50;
-  color: #fff;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
-header h1 { margin: 0; font-size: 20px; }
-#server-info { font-size: 12px; opacity: 0.8; }
+header h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.3px;
+}
+#server-info {
+  padding: 3px 10px;
+  font-size: 12px;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
 
 /* ---------- основна частина ---------- */
 main {
   flex: 1;
   display: flex;
-  gap: 16px;
-  padding: 16px 20px;
+  gap: 18px;
+  padding: 18px 24px;
   min-height: 0;
 }
 
+aside, #content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
 aside {
-  width: 240px;
+  width: 250px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 12px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  gap: 8px;
+  padding: 16px;
 }
-aside h2 { font-size: 15px; margin: 12px 0 4px; }
+aside label, aside h2 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+}
+aside h2 { margin-top: 14px; }
 
 #tables-list {
   flex: 1;
   min-height: 120px;
   margin: 0;
-  padding: 0;
+  padding: 4px;
   list-style: none;
   overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
-#tables-list li { padding: 6px 10px; cursor: pointer; }
-#tables-list li:hover { background: #eef2f7; }
-#tables-list li.selected { background: #2d3e50; color: #fff; }
+#tables-list li {
+  padding: 7px 10px;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#tables-list li:hover { background: var(--bg); }
+#tables-list li.selected {
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+}
 
 #content {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  padding: 12px 16px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+  padding: 16px 20px;
 }
-#content h2 { font-size: 16px; margin: 0 0 10px; }
+#content h2 { margin: 0 0 12px; font-size: 17px; }
 
 /* ---------- таблиці ---------- */
 .table-wrap {
   flex: 1;
   overflow: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
-table { border-collapse: collapse; }
+table { border-collapse: separate; border-spacing: 0; }
 th, td {
-  padding: 6px 10px;
+  padding: 8px 14px;
   text-align: left;
   white-space: nowrap;
-  border: 1px solid #ddd;
+  border-bottom: 1px solid var(--border);
 }
-th { position: sticky; top: 0; background: #eef2f7; }
-th .type { display: block; font-size: 11px; font-weight: normal; color: #666; }
+th {
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  background: #f8f9fc;
+}
+th .type {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+th:first-child, td:first-child { color: var(--muted); text-align: center; }
 
+tbody tr:nth-child(even) { background: #fafbfd; }
 #data-table tbody tr { cursor: pointer; }
-#data-table tbody tr:hover { background: #f7f9fb; }
-#data-table tbody tr.selected { background: #dbe7f5; }
-td input.cell-edit { width: 100%; padding: 2px 4px; }
+#data-table tbody tr:hover { background: var(--bg); }
+#data-table tbody tr.selected { background: var(--accent-soft); }
 
-.row-buttons { display: flex; gap: 8px; margin-top: 10px; }
+td input.cell-edit {
+  width: 100%;
+  padding: 3px 6px;
+  border-color: var(--accent);
+}
+
+/* підказки, коли таблиця порожня */
+#content .table-wrap:has(#data-table:empty)::before {
+  content: "Оберіть таблицю зліва або створіть нову";
+  display: block;
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+}
+#join-dialog .table-wrap:has(#join-result:empty)::before {
+  content: "Результат з'явиться тут";
+  display: block;
+  padding: 30px;
+  text-align: center;
+  color: var(--muted);
+}
+
+.row-buttons { display: flex; gap: 8px; margin-top: 12px; }
 
 /* ---------- кнопки і поля ---------- */
 button, select, input {
-  padding: 6px 10px;
+  padding: 7px 12px;
   font: inherit;
-  border: 1px solid #b8c2cc;
-  border-radius: 4px;
-  background: #fff;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+select:focus, input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 button { cursor: pointer; }
-button:hover:not(:disabled) { background: #eef2f7; }
-button:disabled { color: #aaa; cursor: default; }
+button:hover:not(:disabled) { background: var(--bg); }
+button:disabled { opacity: 0.45; cursor: default; }
+
+/* основні дії */
+#create-table-btn, #add-row-btn, #join-btn, #join-run,
+#new-db-ok, #create-table-ok, #add-row-ok {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+#create-table-btn:hover:not(:disabled), #add-row-btn:hover:not(:disabled),
+#join-btn:hover:not(:disabled), #join-run:hover:not(:disabled),
+#new-db-ok:hover, #create-table-ok:hover, #add-row-ok:hover {
+  background: var(--accent-hover);
+}
+
+/* видалення */
+#drop-table-btn, #delete-row-btn { color: var(--danger); }
+#drop-table-btn:hover:not(:disabled), #delete-row-btn:hover:not(:disabled) {
+  background: var(--danger-soft);
+  border-color: var(--danger);
+}
 
 /* ---------- рядок статусу і помилки ---------- */
 footer {
-  min-height: 32px;
-  padding: 7px 20px;
+  min-height: 34px;
+  padding: 8px 24px;
   font-size: 13px;
-  background: #fff;
-  border-top: 1px solid #ddd;
+  color: var(--muted);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
 }
-.error { color: #c0392b; }
-p.error { margin: 8px 0 0; min-height: 1em; }
+footer.error { color: var(--danger); background: var(--danger-soft); }
+.error { color: var(--danger); }
+p.error { margin: 10px 0 0; min-height: 1em; }
 
 /* ---------- діалогові вікна ---------- */
 dialog {
-  min-width: 420px;
+  min-width: 440px;
   max-width: 90vw;
-  padding: 16px 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 22px 24px;
+  color: var(--text);
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(16, 24, 40, 0.25);
 }
-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
-dialog h3 { margin: 0 0 12px; }
-dialog label { display: block; margin-bottom: 8px; }
+dialog[open] { animation: appear 0.15s ease-out; }
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+dialog::backdrop {
+  background: rgba(17, 24, 39, 0.4);
+  backdrop-filter: blur(2px);
+}
+dialog h3 { margin: 0 0 16px; font-size: 17px; }
+dialog label { display: block; margin-bottom: 10px; }
 dialog label input, dialog label select { margin-left: 6px; }
 
 .dialog-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
-#columns-editor { width: 100%; margin-top: 8px; }
+#columns-editor { width: 100%; margin-top: 10px; }
+#columns-editor td { padding: 5px; border: none; }
 #columns-editor input, #columns-editor select { width: 100%; }
-#columns-editor tr.selected td { background: #dbe7f5; }
+#columns-editor tr.selected td { background: var(--accent-soft); }
+#columns-editor tr.selected td:first-child { border-radius: 6px 0 0 6px; }
+#columns-editor tr.selected td:last-child { border-radius: 0 6px 6px 0; }
 
 #add-row-fields label {
   display: grid;
-  grid-template-columns: 170px 1fr;
+  grid-template-columns: 180px 1fr;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 #add-row-fields input { margin-left: 0; }
 
-#join-dialog { width: 720px; }
-#join-dialog .table-wrap { height: 220px; margin-top: 8px; }
+#join-dialog { width: 760px; }
+#join-dialog label { display: inline-block; margin-right: 14px; }
+#join-run { margin-top: 4px; }
+#join-dialog .table-wrap { height: 230px; margin-top: 10px; }
 #join-save-name { flex: 1; }
